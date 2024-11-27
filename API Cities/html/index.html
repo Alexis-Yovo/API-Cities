@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Géolocalisation et Villes</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #005f6b;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+footer {
+    background-color: #005f6b;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.dropdowns {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+label {
+    font-size: 1rem;
+}
+
+select {
+    padding: 8px;
+    font-size: 1rem;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007b8f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 0 auto;
+    display: block;
+
+}
+
+button:hover {
+    background-color: #005f6b;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Géolocalisation et carte */
+#geolocate-section {
+    margin-top: 20px;
+}
+
+#my-city {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+#map {
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .dropdowns {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    select, button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Choisir une région, un département et afficher les communes</h1>
+    </header>
+
+    <main>
+        <!-- Menus déroulants pour la sélection de la région et du département -->
+        <div class="dropdowns">
+            <label for="regions">Région :</label>
+            <select id="regions">
+                <option value="">-- Choisir une région --</option>
+            </select>
+            <label for="departements">Département :</label>
+            <select id="departements">
+                <option value="">-- Choisir un département --</option>
+            </select>
+        </div>
+
+        <!-- Bouton pour afficher les communes -->
+         <div>
+            <button id="show-communes">Afficher les communes</button>
+        </div>
+
+        <!-- Table des communes affichées -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Commune</th>
+                    <th>Population</th>
+                </tr>
+            </thead>
+            <tbody id="communes-table">
+                <!-- Les communes seront affichées ici -->
+            </tbody>
+        </table>
+
+        <!-- Section pour géolocalisation -->
+        <section id="geolocate-section">
+            <div>
+               <button id="geolocate">Géolocaliser ma ville</button>
+            </div>
+            <div id="my-city"></div>
+        </section>
+
+        <!-- Carte Mapbox -->
+        <div id="map" style="height: 400px; width: 100%;"></div>
+    </main>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+    <script src="../js/mapbox.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
